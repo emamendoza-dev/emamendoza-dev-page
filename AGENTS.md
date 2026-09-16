@@ -16,9 +16,9 @@ It runs `format:check`, `check`, `build` and a gitleaks history scan, and must e
 
 ## Branch workflow
 
-- `main` is protected. Never commit to it directly; work on a branch named `<type>/<topic>` using Conventional Commit types.
-- Changes reach `main` only through a pull request with the `validate` and `secret-scan` checks green.
-- CI runs on pull requests only; local validation is the first gate.
+- Day-to-day work happens on `development` or on `<type>/<topic>` branches created from it (Conventional Commit types). `development` has no CI and no protection.
+- `main` is protected. Never commit to it directly; changes reach it only through a pull request from `development` with the `validate` and `secret-scan` checks green.
+- CI runs only on pull requests into `main`; the local pre-push hook is the gate for everything else.
 
 ## Language
 

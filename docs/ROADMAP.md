@@ -32,7 +32,7 @@ Personal landing page and portfolio for Fernando Emanuel Mendoza Villar, built w
 | Project    | Astro 7.3.3, Tailwind CSS 4.3.3, TypeScript strict (5.9.3), pnpm 12.4.2, `base: /emamendoza-dev-page`, i18n `es` root + `/en/` placeholder pages |
 | Local gate | `pnpm validate` (format, `astro check`, build, gitleaks) as a pre-push hook                                                                      |
 | CI         | `validate` + `secret-scan` on pull requests only                                                                                                 |
-| Protection | `main` requires a PR with both checks green; applies to admins; no force push or deletion                                                        |
+| Branches   | `development` for free work (no CI); `main` requires a PR with both checks green; applies to admins; no force push or deletion                   |
 | Security   | Secret scanning, push protection and Dependabot alerts enabled; Dependabot version updates monthly, TypeScript majors ignored                    |
 | Decisions  | D1–D9 all decided                                                                                                                                |
 
@@ -40,7 +40,7 @@ Personal landing page and portfolio for Fernando Emanuel Mendoza Villar, built w
 
 - No open decisions block it: D4 (bilingual), D6 (manual copy into content collections) and D8 (`es` at root) are decided.
 - Sources: `emamendoza-dev/README.md` (profile) and `emamendoza-dev-cv/Fernando_Emanuel_Mendoza_Villar_CV.yaml` (private; apply the privacy pass from `AGENTS.md`).
-- Start on a branch such as `docs/content-inventory` and write copy under `docs/content/`.
+- Start from `development` (or a `docs/content-inventory` branch off it) and write copy under `docs/content/`.
 - First step: agree on the section list and the web copy for the Hero, in Spanish and English.
 
 ### Known follow-ups
@@ -73,7 +73,7 @@ The `dev/` workspace already holds two related repositories. This project reuses
 | D6  | Content sync with CV         | Decided (2026-09-16) | Manual copy into bilingual content collections with Zod schemas. The CV repo is a reference, not a build input: no tokens, no risk of publishing private fields. When the CV changes, review the site. A local `pnpm sync:cv` draft generator is optional in Phase 6. | Phase 1, Phase 6 |
 | D7  | Package manager              | Decided (2026-09-16) | pnpm                                                                                                                                                                                                                                                                  | Phase 0          |
 | D8  | Default locale and URL shape | Decided (2026-09-16) | `es` at root, English under `/en/`                                                                                                                                                                                                                                    | Phase 1, Phase 4 |
-| D9  | Development workflow         | Decided (2026-09-16) | Branches + pull requests into protected `main`. Local `pnpm validate` runs as a pre-push hook; CI runs only on pull requests.                                                                                                                                         | All phases       |
+| D9  | Development workflow         | Decided (2026-09-16) | Work on `development` (no CI) or topic branches off it; release to protected `main` via PR from `development` with CI. Local `pnpm validate` runs as a pre-push hook.                                                                                                 | All phases       |
 
 **Base path rule (D2):** every internal link and asset must go through `import.meta.env.BASE_URL`. Hardcoded `/...` paths break on the project site.
 

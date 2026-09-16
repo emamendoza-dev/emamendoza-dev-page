@@ -36,12 +36,16 @@ pnpm dev
 
 ## Workflow
 
-`main` is protected: it only changes through pull requests with green checks.
+| Branch        | Purpose                                | CI               | Protection                    |
+| ------------- | -------------------------------------- | ---------------- | ----------------------------- |
+| `development` | Integration branch for day-to-day work | No               | None                          |
+| `main`        | Released state                         | On pull requests | PR with green checks required |
 
-1. Create a branch: `git switch -c feat/<topic>` (or `fix/`, `docs/`, `ci/`, `build/`, `chore/`).
+1. Branch from `development`: `git switch development && git switch -c feat/<topic>` (or `fix/`, `docs/`, `ci/`, `build/`, `chore/`), or commit directly on `development`.
 2. Commit with Conventional Commits.
-3. `git push -u origin <branch>`. The pre-push hook runs `pnpm validate` and blocks the push if anything fails.
-4. Open a pull request. CI (`validate`, `secret-scan`) must pass before merging.
+3. Push. The local pre-push hook runs `pnpm validate` and blocks the push if anything fails.
+4. Merge topic branches into `development` freely (no CI).
+5. When `development` is ready, open a pull request `development` → `main`. CI (`validate`, `secret-scan`) must pass before merging.
 
 ## Commands
 
