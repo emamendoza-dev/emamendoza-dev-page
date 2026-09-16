@@ -14,6 +14,41 @@ Personal landing page and portfolio for Fernando Emanuel Mendoza Villar, built w
 | 5   | Deploy               | Public site                              | Site live, Lighthouse targets met            |
 | 6   | Maintenance          | Automation                               | Content sync and updates documented          |
 
+## Status
+
+**Current phase:** Phase 1 — Content inventory (not started). Last updated 2026-09-16.
+
+| Phase                    | State          |
+| ------------------------ | -------------- |
+| 0 — Repository bootstrap | Done           |
+| 1 — Content inventory    | Ready to start |
+| 2–6                      | Not started    |
+
+### Done so far
+
+| Area       | Result                                                                                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Repository | Public `emamendoza-dev/emamendoza-dev-page`, description, topics                                                                                 |
+| Project    | Astro 7.3.3, Tailwind CSS 4.3.3, TypeScript strict (5.9.3), pnpm 12.4.2, `base: /emamendoza-dev-page`, i18n `es` root + `/en/` placeholder pages |
+| Local gate | `pnpm validate` (format, `astro check`, build, gitleaks) as a pre-push hook                                                                      |
+| CI         | `validate` + `secret-scan` on pull requests only                                                                                                 |
+| Protection | `main` requires a PR with both checks green; applies to admins; no force push or deletion                                                        |
+| Security   | Secret scanning, push protection and Dependabot alerts enabled; Dependabot version updates monthly, TypeScript majors ignored                    |
+| Decisions  | D1–D9 all decided                                                                                                                                |
+
+### Ready for Phase 1
+
+- No open decisions block it: D4 (bilingual), D6 (manual copy into content collections) and D8 (`es` at root) are decided.
+- Sources: `emamendoza-dev/README.md` (profile) and `emamendoza-dev-cv/Fernando_Emanuel_Mendoza_Villar_CV.yaml` (private; apply the privacy pass from `AGENTS.md`).
+- Start on a branch such as `docs/content-inventory` and write copy under `docs/content/`.
+- First step: agree on the section list and the web copy for the Hero, in Spanish and English.
+
+### Known follow-ups
+
+- Dependabot security updates (automatic fix PRs) are disabled; alerts are on.
+- Remove the TypeScript major ignore in `.github/dependabot.yml` once `@astrojs/check` supports TypeScript 7.
+- `homepage` points to the Pages URL, which returns 404 until Phase 5.
+
 ## Context
 
 The `dev/` workspace already holds two related repositories. This project reuses their content and conventions instead of reinventing them.
@@ -59,7 +94,7 @@ The `dev/` workspace already holds two related repositories. This project reuses
 - [x] Sensitive-data check before the first push: secret scan (e.g. gitleaks) over the tree and history, and a manual pass for phone, confidential client names and internal systems.
 - [x] Create the public remote with `gh repo create emamendoza-dev/emamendoza-dev-page --public --source . --push` and set description/topics.
 - [x] Enable GitHub secret scanning and push protection on the repo.
-- [x] CI `validate.yml`: pnpm install, `astro check`, build, secret scan on push/PR.
+- [x] CI `validate.yml`: pnpm install, `astro check`, build, secret scan (on pull requests only since D9).
 - [x] `dependabot.yml` for `npm` (pnpm lockfile) and `github-actions`.
 - [x] Conventional Commits, no AI attribution.
 
@@ -142,10 +177,11 @@ Files under `docs/mockups/`:
 
 ## Environment notes
 
-| Tool  | Status (2026-09-16)                                                                                         |
-| ----- | ----------------------------------------------------------------------------------------------------------- |
-| Node  | 26.8.2 (Homebrew)                                                                                           |
-| npm   | 11.19.1                                                                                                     |
-| Astro | 7.3.3 latest (`create-astro` 5.2.4)                                                                         |
-| gh    | 2.101.0, authenticated as `emamendoza-dev` (SSH)                                                            |
-| pnpm  | Not installed yet (decided in D7). Corepack is no longer bundled with Node 25+, so install pnpm standalone. |
+| Tool     | Status (2026-09-16)                                                                                                                         |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node     | 26.8.2 (Homebrew)                                                                                                                           |
+| npm      | 11.19.1                                                                                                                                     |
+| Astro    | 7.3.3 (`create-astro` 5.2.4)                                                                                                                |
+| gh       | 2.101.0, authenticated as `emamendoza-dev` (SSH)                                                                                            |
+| pnpm     | 12.4.2, installed with `npm i -g pnpm` (no Corepack with Homebrew Node). Build scripts are approved in `pnpm-workspace.yaml` `allowBuilds`. |
+| gitleaks | 8.30.1 in `~/.local/bin`, same version as CI                                                                                                |
