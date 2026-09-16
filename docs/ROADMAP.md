@@ -28,16 +28,17 @@ The `dev/` workspace already holds two related repositories. This project reuses
 
 ## Decisions
 
-| ID  | Decision                     | Status                       | Resolution                                                                                                                                                              | Blocks           |
-| --- | ---------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| D1  | Hosting target               | Decided (2026-09-16)         | GitHub Pages, free plan, deployed with GitHub Actions                                                                                                                   | Phase 0, Phase 5 |
-| D2  | Public URL                   | Decided (2026-09-16)         | Project site `https://emamendoza-dev.github.io/emamendoza-dev-page` (Astro `base: '/emamendoza-dev-page'`). Custom domain reconsidered later; it would drop the `base`. | Phase 0, Phase 5 |
-| D3  | Repo visibility              | Decided (2026-09-16)         | Public (required by free GitHub Pages). A sensitive-data check runs before the first push and on every PR.                                                              | Phase 0          |
-| D4  | Site language                | Decided (2026-09-16)         | Bilingual Spanish/English with Astro i18n routing                                                                                                                       | Phase 1, Phase 2 |
-| D5  | Styling approach             | Decided (2026-09-16)         | Tailwind CSS 4, design tokens as `@theme` variables                                                                                                                     | Phase 2, Phase 4 |
-| D6  | Content sync with CV         | Open, reviewed after Phase 0 | Manual copy into content collections · build-time import of the CV YAML (the CV repo is private, so import needs a sanitized export)                                    | Phase 1, Phase 6 |
-| D7  | Package manager              | Decided (2026-09-16)         | pnpm                                                                                                                                                                    | Phase 0          |
-| D8  | Default locale and URL shape | Decided (2026-09-16)         | `es` at root, English under `/en/`                                                                                                                                      | Phase 1, Phase 4 |
+| ID  | Decision                     | Status               | Resolution                                                                                                                                                                                                                                                            | Blocks           |
+| --- | ---------------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| D1  | Hosting target               | Decided (2026-09-16) | GitHub Pages, free plan, deployed with GitHub Actions                                                                                                                                                                                                                 | Phase 0, Phase 5 |
+| D2  | Public URL                   | Decided (2026-09-16) | Project site `https://emamendoza-dev.github.io/emamendoza-dev-page` (Astro `base: '/emamendoza-dev-page'`). Custom domain reconsidered later; it would drop the `base`.                                                                                               | Phase 0, Phase 5 |
+| D3  | Repo visibility              | Decided (2026-09-16) | Public (required by free GitHub Pages). A sensitive-data check runs before the first push and on every PR.                                                                                                                                                            | Phase 0          |
+| D4  | Site language                | Decided (2026-09-16) | Bilingual Spanish/English with Astro i18n routing                                                                                                                                                                                                                     | Phase 1, Phase 2 |
+| D5  | Styling approach             | Decided (2026-09-16) | Tailwind CSS 4, design tokens as `@theme` variables                                                                                                                                                                                                                   | Phase 2, Phase 4 |
+| D6  | Content sync with CV         | Decided (2026-09-16) | Manual copy into bilingual content collections with Zod schemas. The CV repo is a reference, not a build input: no tokens, no risk of publishing private fields. When the CV changes, review the site. A local `pnpm sync:cv` draft generator is optional in Phase 6. | Phase 1, Phase 6 |
+| D7  | Package manager              | Decided (2026-09-16) | pnpm                                                                                                                                                                                                                                                                  | Phase 0          |
+| D8  | Default locale and URL shape | Decided (2026-09-16) | `es` at root, English under `/en/`                                                                                                                                                                                                                                    | Phase 1, Phase 4 |
+| D9  | Development workflow         | Decided (2026-09-16) | Branches + pull requests into protected `main`. Local `pnpm validate` runs as a pre-push hook; CI runs only on pull requests.                                                                                                                                         | All phases       |
 
 **Base path rule (D2):** every internal link and asset must go through `import.meta.env.BASE_URL`. Hardcoded `/...` paths break on the project site.
 
@@ -68,8 +69,7 @@ The `dev/` workspace already holds two related repositories. This project reuses
 
 **Goal:** know exactly what the site says before designing how it looks.
 
-- [x] Resolve D4 and D8.
-- [ ] Resolve D6.
+- [x] Resolve D4, D6 and D8.
 - [ ] Write copy in both Spanish and English.
 - [ ] Define site sections: Hero, About, Experience, Featured projects, Skills/stack, Education & certifications, Contact.
 - [ ] Extract copy from the profile README and CV YAML into `docs/content/`.
@@ -137,7 +137,7 @@ Files under `docs/mockups/`:
 ## Phase 6 — Maintenance
 
 - [ ] Document the content update flow (CV change → site change).
-- [ ] Optional: automate sync if D6 chose build-time import.
+- [ ] Optional: local `pnpm sync:cv` script that drafts Spanish content from `../emamendoza-dev-cv` (D6), only if manual drift becomes a problem.
 - [ ] Dependabot PRs reviewed monthly.
 
 ## Environment notes

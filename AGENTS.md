@@ -9,10 +9,16 @@ The personal landing page and portfolio of Fernando Emanuel Mendoza Villar, buil
 ## Verify every change
 
 ```sh
-pnpm check && pnpm build && pnpm format:check
+pnpm validate
 ```
 
-All three must exit 0.
+It runs `format:check`, `check`, `build` and a gitleaks history scan, and must exit 0. The same command runs as a pre-push hook; never bypass it (`--no-verify`, `SKIP_SIMPLE_GIT_HOOKS=1`).
+
+## Branch workflow
+
+- `main` is protected. Never commit to it directly; work on a branch named `<type>/<topic>` using Conventional Commit types.
+- Changes reach `main` only through a pull request with the `validate` and `secret-scan` checks green.
+- CI runs on pull requests only; local validation is the first gate.
 
 ## Language
 
