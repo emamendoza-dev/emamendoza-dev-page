@@ -6,7 +6,7 @@ Personal landing page and portfolio for Fernando Emanuel Mendoza Villar, built w
 
 | #   | Phase                | Output                                   | Exit criterion                               |
 | --- | -------------------- | ---------------------------------------- | -------------------------------------------- |
-| 0   | Repository bootstrap | GitHub repo, Astro skeleton, base config | `npm run build` passes locally and in CI     |
+| 0   | Repository bootstrap | GitHub repo, Astro skeleton, base config | `pnpm build` passes locally and in CI        |
 | 1   | Content inventory    | `docs/content/` source of truth          | Every section has approved copy              |
 | 2   | Design system        | `docs/design-system/*.md`                | Tokens and components specified              |
 | 3   | Mockups              | `docs/mockups/*.md`                      | Every page/section has an approved wireframe |
@@ -46,30 +46,30 @@ The `dev/` workspace already holds two related repositories. This project reuses
 **Goal:** an empty but production-shaped Astro project on GitHub.
 
 - [x] Resolve D1, D2, D3, D7.
-- [ ] Install pnpm and pin it with `packageManager` in `package.json`.
-- [ ] `git init` with `main` as default branch.
-- [ ] Scaffold Astro (`pnpm create astro@latest`, minimal template, TypeScript strict).
-- [ ] Add Tailwind CSS 4 (`pnpm astro add tailwind`).
-- [ ] `.gitignore`: `node_modules/`, `dist/`, `.astro/`, `.env*`, `odd/`, `.atl/`, `.codegraph/`.
-- [ ] `.nvmrc` / `engines` pinning the Node version.
-- [ ] `astro.config.mjs` with `site` (and `base` if D2 requires it).
-- [ ] Tooling: Prettier (+ `prettier-plugin-astro`), `astro check`.
-- [ ] `README.md`, `AGENTS.md` + `CLAUDE.md` (`@AGENTS.md`), mirroring the CV repo.
-- [ ] Sensitive-data check before the first push: secret scan (e.g. gitleaks) over the tree and history, and a manual pass for phone, confidential client names and internal systems.
+- [x] Install pnpm and pin it with `packageManager` in `package.json`.
+- [x] `git init` with `main` as default branch.
+- [x] Scaffold Astro (`pnpm create astro@latest`, minimal template, TypeScript strict).
+- [x] Add Tailwind CSS 4 (`pnpm astro add tailwind`).
+- [x] `.gitignore`: `node_modules/`, `dist/`, `.astro/`, `.env*`, `odd/`, `.atl/`, `.codegraph/`.
+- [x] `.nvmrc` / `engines` pinning the Node version.
+- [x] `astro.config.mjs` with `site` (and `base` if D2 requires it).
+- [x] Tooling: Prettier (+ `prettier-plugin-astro`), `astro check`.
+- [x] `README.md`, `AGENTS.md` + `CLAUDE.md` (`@AGENTS.md`), mirroring the CV repo.
+- [x] Sensitive-data check before the first push: secret scan (e.g. gitleaks) over the tree and history, and a manual pass for phone, confidential client names and internal systems.
 - [ ] Create the public remote with `gh repo create emamendoza-dev/emamendoza-dev-page --public --source . --push` and set description/topics.
 - [ ] Enable GitHub secret scanning and push protection on the repo.
-- [ ] CI `validate.yml`: pnpm install, `astro check`, build, secret scan on push/PR.
-- [ ] `dependabot.yml` for `npm` (pnpm lockfile) and `github-actions`.
-- [ ] Conventional Commits, no AI attribution.
+- [x] CI `validate.yml`: pnpm install, `astro check`, build, secret scan on push/PR.
+- [x] `dependabot.yml` for `npm` (pnpm lockfile) and `github-actions`.
+- [x] Conventional Commits, no AI attribution.
 
-**Exit:** `npm run build` passes locally and the first CI run is green.
+**Exit:** `pnpm build` passes locally and the first CI run is green.
 
 ## Phase 1 — Content inventory
 
 **Goal:** know exactly what the site says before designing how it looks.
 
-- [x] Resolve D4.
-- [ ] Resolve D6 and D8.
+- [x] Resolve D4 and D8.
+- [ ] Resolve D6.
 - [ ] Write copy in both Spanish and English.
 - [ ] Define site sections: Hero, About, Experience, Featured projects, Skills/stack, Education & certifications, Contact.
 - [ ] Extract copy from the profile README and CV YAML into `docs/content/`.
