@@ -14,7 +14,10 @@
     "astro": "astro",
     "check": "astro check",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "secrets": "gitleaks git --redact .",
+    "validate": "pnpm format:check && pnpm check && pnpm build && pnpm secrets",
+    "prepare": "simple-git-hooks"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -29,6 +32,10 @@
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^1.0.0",
     "prettier-plugin-tailwindcss": "^0.8.1",
+    "simple-git-hooks": "^2.14.0",
     "typescript": "^5.9.3"
+  },
+  "simple-git-hooks": {
+    "pre-push": "pnpm validate"
   }
 }
