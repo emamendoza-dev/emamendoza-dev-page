@@ -1,10 +1,10 @@
 name: Validate
 
+# Pushes are validated locally by the pre-push hook (`pnpm validate`).
+# CI runs on pull requests, which are the only way into protected `main`.
 on:
-  push:
-    branches:
-      - main
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
