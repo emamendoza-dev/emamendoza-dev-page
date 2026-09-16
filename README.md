@@ -11,10 +11,18 @@ Personal landing page and portfolio for Fernando Emanuel Mendoza Villar, built w
 
 ## Quick start
 
-### 1. Install pnpm
+### 1. Install pnpm and gitleaks
 
 ```sh
 npm install -g pnpm
+```
+
+The pre-push hook scans for secrets with [gitleaks](https://github.com/gitleaks/gitleaks) 8.30.1 (the same version CI uses). Install the release binary and make sure `gitleaks` is on your `PATH`:
+
+```sh
+curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz \
+  | tar -xz -C ~/.local/bin gitleaks
+gitleaks version
 ```
 
 ### 2. Clone and run
@@ -22,9 +30,18 @@ npm install -g pnpm
 ```sh
 git clone git@github.com:emamendoza-dev/emamendoza-dev-page.git
 cd emamendoza-dev-page
-pnpm install
+pnpm install   # also installs the pre-push hook
 pnpm dev
 ```
+
+## Workflow
+
+`main` is protected: it only changes through pull requests with green checks.
+
+1. Create a branch: `git switch -c feat/<topic>` (or `fix/`, `docs/`, `ci/`, `build/`, `chore/`).
+2. Commit with Conventional Commits.
+3. `git push -u origin <branch>`. The pre-push hook runs `pnpm validate` and blocks the push if anything fails.
+4. Open a pull request. CI (`validate`, `secret-scan`) must pass before merging.
 
 ## Commands
 
@@ -36,6 +53,8 @@ pnpm dev
 | `pnpm check`        | Type-check with `astro check`            |
 | `pnpm format`       | Format the codebase with Prettier        |
 | `pnpm format:check` | Check formatting without writing changes |
+| `pnpm secrets`      | Scan the git history with gitleaks       |
+| `pnpm validate`     | Run every check above (pre-push hook)    |
 
 ## Repository layout
 
