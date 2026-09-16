@@ -22,7 +22,7 @@ The `dev/` workspace already holds two related repositories. This project reuses
 | --------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `emamendoza-dev`      | Public     | GitHub profile README. Source for stack, featured projects and tagline.                                                                                                 |
 | `emamendoza-dev-cv`   | Private    | CV as code (RenderCV YAML). Source of truth for experience, projects, education, skills. Reference for repo conventions (`AGENTS.md`, CI, Dependabot, release runbook). |
-| `emamendoza-dev-page` | To create  | This landing page.                                                                                                                                                      |
+| `emamendoza-dev-page` | Public     | This landing page.                                                                                                                                                      |
 
 **Privacy rule inherited from the CV repo:** the CV contains a personal phone number and confidential client details are described generically. The public site must never publish the phone number, and must follow the same confidentiality rules as `emamendoza-dev-cv/AGENTS.md`.
 
@@ -56,8 +56,8 @@ The `dev/` workspace already holds two related repositories. This project reuses
 - [x] Tooling: Prettier (+ `prettier-plugin-astro`), `astro check`.
 - [x] `README.md`, `AGENTS.md` + `CLAUDE.md` (`@AGENTS.md`), mirroring the CV repo.
 - [x] Sensitive-data check before the first push: secret scan (e.g. gitleaks) over the tree and history, and a manual pass for phone, confidential client names and internal systems.
-- [ ] Create the public remote with `gh repo create emamendoza-dev/emamendoza-dev-page --public --source . --push` and set description/topics.
-- [ ] Enable GitHub secret scanning and push protection on the repo.
+- [x] Create the public remote with `gh repo create emamendoza-dev/emamendoza-dev-page --public --source . --push` and set description/topics.
+- [x] Enable GitHub secret scanning and push protection on the repo.
 - [x] CI `validate.yml`: pnpm install, `astro check`, build, secret scan on push/PR.
 - [x] `dependabot.yml` for `npm` (pnpm lockfile) and `github-actions`.
 - [x] Conventional Commits, no AI attribution.
