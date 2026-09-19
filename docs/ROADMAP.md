@@ -16,38 +16,41 @@ Personal landing page and portfolio for Fernando Emanuel Mendoza Villar, built w
 
 ## Status
 
-**Current phase:** Phase 1 — Content inventory (not started). Last updated 2026-09-16.
+**Current phase:** Phase 2 — Design system (not started). Last updated 2026-09-19.
 
 | Phase                    | State          |
 | ------------------------ | -------------- |
 | 0 — Repository bootstrap | Done           |
-| 1 — Content inventory    | Ready to start |
-| 2–6                      | Not started    |
+| 1 — Content inventory    | Done           |
+| 2 — Design system        | Ready to start |
+| 3–6                      | Not started    |
 
 ### Done so far
 
-| Area       | Result                                                                                                                                           |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Repository | Public `emamendoza-dev/emamendoza-dev-page`, description, topics                                                                                 |
-| Project    | Astro 7.3.3, Tailwind CSS 4.3.3, TypeScript strict (5.9.3), pnpm 12.4.2, `base: /emamendoza-dev-page`, i18n `es` root + `/en/` placeholder pages |
-| Local gate | `pnpm validate` (format, `astro check`, build, gitleaks) as a pre-push hook                                                                      |
-| CI         | `validate` + `secret-scan` on pull requests only                                                                                                 |
-| Branches   | `development` for free work (no CI); `main` requires a PR with both checks green; applies to admins; no force push or deletion                   |
-| Security   | Secret scanning, push protection and Dependabot alerts enabled; Dependabot version updates monthly, TypeScript majors ignored                    |
-| Decisions  | D1–D9 all decided                                                                                                                                |
+| Area       | Result                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repository | Public `emamendoza-dev/emamendoza-dev-page`, description, topics                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Project    | Astro 7.3.3, Tailwind CSS 4.3.3, TypeScript strict (5.9.3), pnpm 12.4.2, `base: /emamendoza-dev-page`, i18n `es` root + `/en/` placeholder pages                                                                                                                                                                                                                                                                                                                              |
+| Local gate | `pnpm validate` (format, `astro check`, build, gitleaks) as a pre-push hook                                                                                                                                                                                                                                                                                                                                                                                                   |
+| CI         | `validate` + `secret-scan` on pull requests only                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Branches   | `development` for free work (no CI); `main` requires a PR with both checks green; applies to admins; no force push or deletion                                                                                                                                                                                                                                                                                                                                                |
+| Security   | Secret scanning, push protection and Dependabot alerts enabled; Dependabot version updates monthly, TypeScript majors ignored                                                                                                                                                                                                                                                                                                                                                 |
+| Decisions  | D1–D9 all decided                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Content    | Seven sections (Hero, About, Experience, Featured project, Skills, Education & certifications, Contact) with bilingual (es/en) copy, all approved (`docs/content/`). Employers named (already public via the profile README); confidential clients described generically. Media assets specified in `docs/content/assets.md`, not yet produced. CV download wired to per-locale placeholder stub PDFs in `public/cv/`; the real CV is generated later in the private CV repo. |
 
-### Ready for Phase 1
+### Ready for Phase 2
 
-- No open decisions block it: D4 (bilingual), D6 (manual copy into content collections) and D8 (`es` at root) are decided.
-- Sources: `emamendoza-dev/README.md` (profile) and `emamendoza-dev-cv/Fernando_Emanuel_Mendoza_Villar_CV.yaml` (private; apply the privacy pass from `AGENTS.md`).
-- Start from `development` (or a `docs/content-inventory` branch off it) and write copy under `docs/content/`.
-- First step: agree on the section list and the web copy for the Hero, in Spanish and English.
+- No open decisions block it: D1–D9 are all decided, and Phase 1 settled the content itself.
+- Input: the approved copy under `docs/content/` and the art direction in `docs/content/assets.md`.
+- Phase 2 owns the design tokens the content deliberately left out — exact hex values for the deep blue base, the electric green accent and the grays, plus type scale and spacing.
+- Two rendering constraints inherited from Phase 1: Skills renders 36 chips across six groups, and the full UPIITA institution name is long for a heading, so plan a short form.
 
 ### Known follow-ups
 
 - Dependabot security updates (automatic fix PRs) are disabled; alerts are on.
 - Remove the TypeScript major ignore in `.github/dependabot.yml` once `@astrojs/check` supports TypeScript 7.
 - `homepage` points to the Pages URL, which returns 404 until Phase 5.
+- Media assets (photo, illustrations, screenshots, icons) are specified in `docs/content/assets.md` but not yet produced; Phase 4 needs the actual files before build.
 
 ## Context
 
@@ -105,12 +108,12 @@ The `dev/` workspace already holds two related repositories. This project reuses
 **Goal:** know exactly what the site says before designing how it looks.
 
 - [x] Resolve D4, D6 and D8.
-- [ ] Write copy in both Spanish and English.
-- [ ] Define site sections: Hero, About, Experience, Featured projects, Skills/stack, Education & certifications, Contact.
-- [ ] Extract copy from the profile README and CV YAML into `docs/content/`.
-- [ ] Rewrite for web (shorter than the CV; outcome-first).
-- [ ] List assets needed: photo, project screenshots, logos/icons, CV download link strategy (the CV release is private).
-- [ ] Privacy pass: no phone, no confidential names.
+- [x] Write copy in both Spanish and English.
+- [x] Define site sections: Hero, About, Experience, Featured projects, Skills/stack, Education & certifications, Contact.
+- [x] Extract copy from the profile README and CV YAML into `docs/content/`.
+- [x] Rewrite for web (shorter than the CV; outcome-first).
+- [x] List assets needed: photo, project screenshots, logos/icons, CV download link strategy (the CV release is private).
+- [x] Privacy pass: no phone, no confidential names.
 
 **Exit:** content approved by the owner.
 
